@@ -146,10 +146,10 @@ docker compose up -d --build
 
 This will start:
 
-Laravel app (laravel_app)
-Nginx (nginx_server) → http://localhost:8000
-PostgreSQL (postgres_db)
-Adminer UI (adminer) → http://localhost:8080
+Laravel app (laravel_app)  
+Nginx (nginx_server) → http://localhost:8000  
+PostgreSQL (postgres_db)  
+Adminer UI (adminer) → http://localhost:8080  
 
 5. **Install dependencies and run migrations**
 
