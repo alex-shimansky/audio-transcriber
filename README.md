@@ -97,29 +97,33 @@ Laravel jobs are processed via SQS queue
 
 1. **Clone the repository**
 
-`
-git clone https://github.com/your-username/aws-transcribe-laravel.git
+```bash
+git clone https://github.com/alex-shimansky/audio-transcriber.git
 cd aws-transcribe-laravel
-`
+```
 
 2. **Configure environment variables**
 
 Copy .env.example to .env:
-`
+
+```bash
 cp .env.example .env
-`
+```
+
 Set AWS, database, and email credentials in .env:
-`
+<pre lang="md">
 AWS_ACCESS_KEY_ID=your-key
 AWS_SECRET_ACCESS_KEY=your-secret
 AWS_DEFAULT_REGION=us-east-1
 AWS_BUCKET=your-bucket-name
-`
-`
+</pre>
+
+<pre lang="md">
 QUEUE_CONNECTION=sqs
 SQS_QUEUE=https://sqs.us-east-1.amazonaws.com/123456789012/your-queue
-`
-`
+</pre>
+
+<pre lang="md">
 MAIL_MAILER=smtp
 MAIL_HOST=smtp.yourprovider.com
 MAIL_PORT=587
@@ -128,16 +132,18 @@ MAIL_PASSWORD=yourpassword
 MAIL_ENCRYPTION=tls
 MAIL_FROM_ADDRESS=no-reply@example.com
 MAIL_FROM_NAME="Transcription Service"
-`
+</pre>
 
 3. **Set up Lambda function**
 
 The Lambda function code is located in the start_transcription.py file.
 
 4. **Start Docker containers**
-`
+
+```bash
 docker compose up -d --build
-`
+```
+
 This will start:
 
 Laravel app (laravel_app)
@@ -146,19 +152,24 @@ PostgreSQL (postgres_db)
 Adminer UI (adminer) → http://localhost:8080
 
 5. **Install dependencies and run migrations**
-`
+
+```bash
 docker compose exec app composer install
 docker compose exec app php artisan migrate
-`
+```
+
 6. **Queue Workers**
 
 To process transcription jobs, you must run both of the following workers:
-`
+
+```bash
 php artisan queue:work sqs --queue=default-queue
-`
+```
 This worker listens to the main SQS queue and triggers the AWS Lambda function for transcription.
-`
+
+```bash
 php artisan sqs:listen-transcribe
+```
 
 This worker listens to SNS notifications from AWS Transcribe and saves the transcription result to the database.
 
