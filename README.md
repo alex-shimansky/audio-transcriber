@@ -99,7 +99,7 @@ Laravel jobs are processed via SQS queue
 
 ```bash
 git clone https://github.com/alex-shimansky/audio-transcriber.git
-cd aws-transcribe-laravel
+cd audio-transcriber
 ```
 
 2. **Configure environment variables**
