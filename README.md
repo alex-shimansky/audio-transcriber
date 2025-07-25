@@ -151,14 +151,20 @@ Nginx (nginx_server) → http://localhost:8000
 PostgreSQL (postgres_db)  
 Adminer UI (adminer) → http://localhost:8080  
 
-5. **Install dependencies and run migrations**
+5. **Generate application encryption key**
+
+```bash
+docker compose exec app php artisan key:generate
+```
+
+6. **Install dependencies and run migrations**
 
 ```bash
 docker compose exec app composer install
 docker compose exec app php artisan migrate
 ```
 
-6. **Queue Workers**
+7. **Queue Workers**
 
 To process transcription jobs, you must run both of the following workers:
 
